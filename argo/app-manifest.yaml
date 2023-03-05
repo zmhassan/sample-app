@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: sample-app
-  namespace: argo
+  namespace: default
 spec:
   project: default
   source:
@@ -11,4 +11,4 @@ spec:
     path: helm/sample-app
   destination:
     server: https://kubernetes.default.svc
-    namespace:  sample-app
+    namespace:  default
