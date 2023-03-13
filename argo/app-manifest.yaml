@@ -2,13 +2,21 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: sample-app
-  namespace: default
+  namespace: argo
 spec:
   project: default
   source:
     repoURL: https://github.com/zmhassan/sample-app.git
     targetRevision: HEAD
-    path: helm/sample-app
+    path: helm/sample-app # Its best to have path to dev, staging, prod
   destination:
     server: https://kubernetes.default.svc
     namespace:  default
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    
+    automated:
+      selfHeal: true
+      prune: true
